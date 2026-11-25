@@ -4,7 +4,8 @@ One static repository, one hosting project, multiple independent websites.
 
 - `index.html`: collection homepage.
 - `jemma/`: redesigned Mansel Law Consultancy website.
-- Future sites: add `khaista/index.html`, `another-name/index.html`, etc.
+- `khaista/`: Khaista Bae makeup, hair and henna website.
+- Future sites: add `another-name/index.html`, etc.
 
 ## URLs
 
@@ -12,7 +13,7 @@ On GitHub Pages (once enabled):
 
 - Collection: https://ksherani.github.io/demo-sites/
 - Mansel: https://ksherani.github.io/demo-sites/jemma/
-- Future Khaista: https://ksherani.github.io/demo-sites/khaista/
+- Khaista: https://ksherani.github.io/demo-sites/khaista/
 
 On a custom domain pointing to this Pages project, these become `https://your-domain.com/jemma/` and `/khaista/`.
 
@@ -22,7 +23,7 @@ In repository Settings → Pages → Build and deployment, select **GitHub Actio
 
 ## Add a site
 
-1. Create a lowercase folder, e.g. `khaista/`.
+1. Create a lowercase folder, e.g. `another-name/`.
 2. Put its `index.html` and all its assets inside that folder.
 3. Use relative links (`styles.css`, `assets/photo.jpg`), not root-relative `/assets/...` links. This works on GitHub Pages and custom domains.
 4. Add a link to it in the root `index.html`.
@@ -43,3 +44,9 @@ Content and original images sourced from https://www.mansellawconsultancy.co.uk/
 This is a design concept and is marked `noindex,nofollow`. No new professional credentials, reviews, fees or outcome guarantees have been invented. The original broad representation claim is qualified as support subject to the scope agreed for the matter; the consultancy’s non-solicitor disclaimer remains explicit. Source testimonials are reproduced as supplied. Images remain subject to the original owner's rights.
 
 The contact form prepares a `mailto:` draft. It does not store, transmit or claim to submit enquiries. Phone and direct email links also work. A production enquiry backend and its privacy policy should be added before replacing this with a server-submitted form.
+
+## Khaista import
+
+Imported from https://github.com/ksherani/khaista at commit `b1b6b5b653bdfedf97490a7cbce0306a33c75e10`. The original repository is unchanged. Only the public site files are copied; no nested Git repository or separate deployment configuration is included. Open Graph URLs now point to `/demo-sites/khaista/`.
+
+The original artist-approval notice and editorial-photo disclosures are retained. Its enquiry form prepares a WhatsApp message for the visitor to review and send; it does not submit bookings or store information. Future edits can be made directly in `khaista/` in this repository.
