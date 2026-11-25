@@ -5,17 +5,15 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 concurrency:
   group: pages
   cancel-in-progress: false
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v6
       - name: Assemble public files
@@ -30,6 +28,26 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Wait for uploaded artifact to be available
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          for attempt in {1..12}; do
+            count=$(gh api "repos/$GH_REPO/actions/runs/$RUN_ID/artifacts" --jq '[.artifacts[] | select(.name == "github-pages")] | length')
+            if [ "$count" -gt 0 ]; then exit 0; fi
+            sleep 5
+          done
+          echo "Pages artifact was not available within 60 seconds."
+          exit 1
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
